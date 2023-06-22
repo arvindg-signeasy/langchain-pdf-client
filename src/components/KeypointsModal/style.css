@@ -1,0 +1,59 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Haze effect */
+    overflow: auto; /* Enable smooth scrolling */
+  }
+  
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    font-size: 12px; /* Reduce font size */
+  }
+  
+  .table-container {
+    flex: 1;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .key {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .value {
+    padding: 5px 10px;
+  }
+  
+  .border {
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 10px;
+  }
+  
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .close-icon img {
+    width: 16px;
+    height: 16px;
+  }
+  

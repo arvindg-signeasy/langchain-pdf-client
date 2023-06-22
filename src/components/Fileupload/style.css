@@ -1,0 +1,19 @@
+.file-upload {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .file-info {
+    display: flex;
+    align-items: center;
+    background-color: #eef2f5;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .file-info span:first-child {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  
