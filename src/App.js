@@ -34,7 +34,7 @@ const App = () => {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      fetch('http://localhost:5000/upload', {
+      fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -55,7 +55,7 @@ const App = () => {
   const handleGenerateEmbedding = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:5000/embedding');
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/embedding`);
       const data = await response.json();
       console.log('embedded')
       setEmbeddingSuccess(true)
@@ -69,7 +69,7 @@ const App = () => {
   const handleGenerateKeypoints = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:5000/keypoints');
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/keypoints`);
       const data = await response.json();
       console.log('Keypoints successful')
       setKeypointsSuccess(true)
@@ -84,7 +84,7 @@ const App = () => {
   const handleGenerateKeypointsSmallDocs = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:5000/smallkeypoints');
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/smallkeypoints`);
       const data = await response.json();
       console.log('Keypoints successful')
       setKeypointsSuccess(true)
@@ -99,7 +99,7 @@ const App = () => {
   const handleGenerateSummary = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:5000/summary');
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/summary`);
       const data = await response.json();
       console.log('Summary successful')
       setSummariseSuccess(true)

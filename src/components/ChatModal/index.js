@@ -22,7 +22,7 @@ const ChatModal = ({ handleClose, isSmallDoc = false }) => {
     chat.push({ role: 'Human', message: chatInputText})
     try {
       if(isSmallDoc){
-        const response = await fetch('http://localhost:5000/smallChat', {
+        const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/smallChat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const ChatModal = ({ handleClose, isSmallDoc = false }) => {
         console.log('Chat successful');
         setLoading(false)
       } else {
-        const response = await fetch('http://localhost:5000/chat', {
+        const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
