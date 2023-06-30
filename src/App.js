@@ -5,6 +5,7 @@ import FileActions from './components/Fileactions'
 import KeypointsModal from './components/KeypointsModal'
 import SummaryModal from './components/SummaryModal'
 import ChatModal from './components/ChatModal'
+import JSON_DATA from './data.js'
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ const App = () => {
   const [summariseData, setSummariseData] = useState('')
   const [chatModalOpen, setChatModalOpen] = useState(false)
   const [smallDoc, setSmallDoc] = useState(false)
+  const [fileType, setFileType] = useState('')
 
   useEffect(() => {
     if(selectedFile){
@@ -43,6 +45,7 @@ const App = () => {
           console.log(data);
           setLoading(false)
           setFileUploadSuccess(true)
+          setFileType(data.fileType)
           // Handle the response from the server
         })
         .catch((error) => {
@@ -112,6 +115,62 @@ const App = () => {
     }
   }
 
+  const handleGenerateImprovement = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/improvement`);
+      const data = await response.json();
+      console.log('Improvement successful')
+      setKeypointsSuccess(true)
+      setKeypointsData(data)
+      console.log(3, data)
+      setLoading(false)
+    } catch (error) {
+      console.log('Error:', error);
+      setLoading(false)
+    }
+  }
+
+  const handleGenerateInsightsForJson = async () => {
+    setLoading(true)
+    const json = JSON_DATA
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/jsoninsight`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(json),
+      });
+      
+      const data = await response.json();
+      console.log('Improvement successful')
+      setKeypointsSuccess(true)
+      setKeypointsData({})
+      console.log(3, data)
+      setLoading(false)
+    } catch (error) {
+      console.log('Error:', error);
+      setLoading(false)
+    }
+  }
+
+  const handleGenerateInsightsForCSV = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/csvinsight`);
+      const data = await response.json();
+      console.log('Improvement successful')
+      setKeypointsSuccess(true)
+      setKeypointsData({})
+      console.log(3, data)
+      setLoading(false)
+    } catch (error) {
+      console.log('Error:', error);
+      setLoading(false)
+    }
+  }
+
   return (
     <div>
       {loading && <Loader />}
@@ -119,7 +178,7 @@ const App = () => {
           <h1>Langchain APP for PDF</h1>
           <div className="app-content">
           {fileUploadSuccess ? <FileActions openChatModal={() => {setChatModalOpen(true)}} openSmallChatModal={() => {setChatModalOpen(true)
-          setSmallDoc(true)}} generateSummary={handleGenerateSummary} generateKeypoints={handleGenerateKeypoints} generateKeypointsSmallDocs={handleGenerateKeypointsSmallDocs} generateEmbedding={handleGenerateEmbedding} embeddingSuccess={embeddingSuccess}/> : <FileUpload selectedFile={selectedFile} saveFile={handleSaveFile}/>}
+          setSmallDoc(true)}} generateImprovement={handleGenerateImprovement} generateInsightsForJson={handleGenerateInsightsForJson} generateInsightsForCSV={handleGenerateInsightsForCSV} generateSummary={handleGenerateSummary} generateKeypoints={handleGenerateKeypoints} generateKeypointsSmallDocs={handleGenerateKeypointsSmallDocs} generateEmbedding={handleGenerateEmbedding} embeddingSuccess={embeddingSuccess}/> : <FileUpload selectedFile={selectedFile} saveFile={handleSaveFile}/>}
           </div>
        </div>
       }

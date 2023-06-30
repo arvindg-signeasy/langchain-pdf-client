@@ -20,6 +20,7 @@ const ChatModal = ({ handleClose, isSmallDoc = false }) => {
     setLoading(true)
     const chat = [...chatMessages]
     chat.push({ role: 'Human', message: chatInputText})
+    const chatHistory = chat.map(({ role, message }) => `${role}: ${message}`).join('. ');
     try {
       if(isSmallDoc){
         const response = await fetch(`${process.env.REACT_APP_API_DEFAULT_URL}/smallChat`, {
@@ -27,7 +28,7 @@ const ChatModal = ({ handleClose, isSmallDoc = false }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ chat: chatInputText, count: chat.length }),
+          body: JSON.stringify({ chat: chatInputText, count: chat.length, chat_history: chatHistory }),
         });
         const data = await response.json();
         chat.push({ role: 'Vision', message: data.chatResult.response})
@@ -40,10 +41,10 @@ const ChatModal = ({ handleClose, isSmallDoc = false }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ chat: chatInputText }),
+          body: JSON.stringify({ chat: chatInputText,  chat_history: chatHistory }),
         });
         const data = await response.json();
-        chat.push({ role: 'Vision', message: data.chatResult.text})
+        chat.push({ role: 'Vision', message: data.chatResult})
         setChatMessages(chat)
         console.log('Chat successful');
         setLoading(false)

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FileActions = ({ generateEmbedding , embeddingSuccess, generateKeypoints, generateKeypointsSmallDocs, generateSummary, openChatModal, openSmallChatModal}) => {
+const FileActions = ({ generateEmbedding , embeddingSuccess, generateKeypoints, generateKeypointsSmallDocs, generateSummary, openChatModal, openSmallChatModal, generateImprovement, generateInsightsForJson , generateInsightsForCSV}) => {
     return embeddingSuccess ? <div style={containerStyle}>
     <h2 style={messageStyle}>Embedding creation was successful!</h2>
     <div style={ctaContainerStyle}>
@@ -8,7 +8,10 @@ const FileActions = ({ generateEmbedding , embeddingSuccess, generateKeypoints, 
       <button style={ctaButtonStyle} onClick={openChatModal}>Chat with Document</button>
       <button style={ctaButtonStyle} onClick={openSmallChatModal}>Chat with Small Document</button>
       <button style={ctaButtonStyle} onClick={generateKeypoints}>Generate Keypoints</button>
+      <button style={ctaButtonStyle} onClick={generateImprovement}>Suggest improvements</button>
       <button style={ctaButtonStyle} onClick={generateKeypointsSmallDocs}>Generate Keypoints for small docs</button>
+      <button style={ctaButtonStyle} onClick={generateInsightsForJson}>Generate Insights for JSON</button>
+      <button style={ctaButtonStyle} onClick={generateInsightsForCSV}>Generate Insights for CSV</button>
     </div>
   </div> : <div>
         <h2>File Uploaded Successfully!</h2>
@@ -31,10 +34,11 @@ const containerStyle = {
   const ctaContainerStyle = {
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap'
   };
   
   const ctaButtonStyle = {
-    margin: '0 10px',
+    margin: '30px 30px',
     padding: '10px 20px',
     fontSize: '16px',
     fontWeight: 'bold',
